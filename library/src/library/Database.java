@@ -5,7 +5,7 @@ import java.sql.*;
 public class Database {
 	Connection con = null;
 	Statement stmt = null;
-	String url = "jdbc:mysql://localhost:30/phl";	//dbstudy 스키마
+	String url = "jdbc:mysql://124.56.138.3:30/db2019110340";	//dbstudy 스키마
 	String username = "2019110340";
 	String password = "test1234!@#$QWER";		//본인이 설정한 root 계정의 비밀번호를 입력하면 된다.
 	
