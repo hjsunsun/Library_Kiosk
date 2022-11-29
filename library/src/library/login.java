@@ -130,18 +130,11 @@ public class login extends JFrame {
 			}
 			
 			else if(id != null && pw != null) {
-//				if(id.equals("test") && pw.equals("test1")) {
-//					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
-//					new borrow();
-//					dispose();
-//					return;
-//					}
-//				else
-//					JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
-
 				if(db.logincheck(id, pw) == true) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
 					System.out.println("로그인 성공");
 					JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
+					new borrow();
+					setVisible(false);
 					// 대출, 예약, 연장 총 화면으로 넘어가기
 					
 				} else {

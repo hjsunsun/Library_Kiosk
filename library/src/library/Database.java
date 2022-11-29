@@ -26,17 +26,21 @@ public class Database {
 		
 		String id = _i;
 		String pw = _p;
+		PreparedStatement ps = null;
 		
 		try {
 			String checkingStr = "SELECT 비밀번호 FROM 학생 WHERE 회원아이디='" + id + "'";
 			ResultSet result = stmt.executeQuery(checkingStr);
-			
+			String loginupdate = "update 학생 set loginYN = 1 WHERE 회원아이디 ='" + id + "'";
+			ps = con.prepareStatement(loginupdate);
+
 			int count = 0;
 			while(result.next()) {
 				if(pw.equals(result.getString("비밀번호"))) {
 					flag = true;
+					ps.executeUpdate();
 				}
-				
+
 				else {
 					flag = false;
 				}
@@ -49,4 +53,49 @@ public class Database {
 		
 		return flag;
 	}
+
+	/* 로그아웃 */
+	void logout(){
+		PreparedStatement ps = null;
+
+		try {
+			String logout = "update 학생 set loginYN = 0";
+			ps = con.prepareStatement(logout);
+
+			int count = 0;
+			ps.executeUpdate();
+
+		} catch(Exception e) {
+			System.out.println("로그아웃 실패 > " + e.toString());
+		}
+	}
+	/* 책 보유 여부 확인 */
+	boolean bookcheck(String _b) {
+		boolean flag = false;
+
+		String book = _b; // ex) 20001
+
+		try {
+			String checkingStr = "SELECT "+ book+" FROM 도서";
+			ResultSet result = stmt.executeQuery(checkingStr);
+
+			int count = 0;
+			while(result.next()) {
+				if(book.equals(result.getString("도서 ID"))) {
+					flag = true;
+				}
+
+				else {
+					flag = false;
+				}
+				count++;
+			}
+		} catch(Exception e) {
+			flag = false;
+			System.out.println("도서 찾기 실패 > " + e.toString());
+		}
+
+		return flag;
+	}
+
 }

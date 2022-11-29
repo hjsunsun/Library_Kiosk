@@ -5,6 +5,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class borrow extends JFrame{
+		Database db = new Database();
 	   private JPanel p1 = new JPanel();
 	   private JPanel p2 = new JPanel();
 	   
@@ -72,6 +73,7 @@ public class borrow extends JFrame{
 	         }
 	         else if (b.getText().equals("홈"))   {
 	            new library_main();
+				db.logout();
 	            dispose();
 	         }
 	      }
@@ -82,7 +84,7 @@ public class borrow extends JFrame{
 	         if(bookId.equals("")){
 	            JOptionPane.showMessageDialog(null, "도서 ID를 입력해주세요.", "도서 대출 실패", JOptionPane.ERROR_MESSAGE);
 	         }
-	         else if(bookId != null) {
+			 else if (db.bookcheck(bookId) == true){
 	            int num = JOptionPane.showConfirmDialog(null, "대출하시겠습니까?", "대출", JOptionPane.YES_NO_OPTION);
 	            if(num == JOptionPane.CLOSED_OPTION) {
 	               new borrow();
@@ -91,8 +93,12 @@ public class borrow extends JFrame{
 	            }
 	            else if(num == JOptionPane.YES_OPTION) {
 	               JOptionPane.showMessageDialog(null, "대출이 완료되었습니다.", "대출 성공", JOptionPane.INFORMATION_MESSAGE);
-	            }
+	            	// DB 쿼리 들어가야함
+				}
 	         }
+			 else{
+				 JOptionPane.showMessageDialog(null, "존재하지 않는 책 ID입니다.", "도서 대출 실패", JOptionPane.INFORMATION_MESSAGE);
+			 }
 	      }
 	   }
 	}

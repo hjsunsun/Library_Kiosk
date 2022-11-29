@@ -9,6 +9,7 @@ import library.login.keyBorad2;
 import library.login.keyBorad1.inputkey_ActionListener;
 
 public class reservation extends JFrame {
+	Database db = new Database();
 	private JPanel p1 = new JPanel();
 
 	private JButton btn1 = new JButton("대출");
@@ -78,6 +79,7 @@ public class reservation extends JFrame {
 				setVisible(false);
 			} else if (b.getText().equals("홈")) {
 				new library_main();
+				db.logout();
 				dispose();
 			}
 		}

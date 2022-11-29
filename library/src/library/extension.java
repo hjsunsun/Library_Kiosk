@@ -9,6 +9,7 @@ import javax.swing.*;
 
 
 public class extension extends JFrame {
+	Database db = new Database();
 	private JPanel p1 = new JPanel();
 	private JPanel p2 = new JPanel();
 	private JPanel p3 = new JPanel();
@@ -80,6 +81,7 @@ public class extension extends JFrame {
 			}
 			else if (b.getText().equals("홈"))	{
 				new library_main();
+				db.logout();
 				dispose();
 			}
 		}
