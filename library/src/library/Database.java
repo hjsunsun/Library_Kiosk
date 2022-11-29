@@ -35,12 +35,10 @@ public class Database {
 			while(result.next()) {
 				if(pw.equals(result.getString("비밀번호"))) {
 					flag = true;
-					System.out.println("로그인 성공");
 				}
 				
 				else {
 					flag = false;
-					System.out.println("로그인 실패");
 				}
 				count++;
 			}

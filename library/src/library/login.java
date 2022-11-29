@@ -7,56 +7,113 @@ import javax.swing.*;
 public class login extends JFrame {
 	private JLabel title = new JLabel("동국대학교 중앙도서관 키오스크");
 	private JLabel StudentNumber = new JLabel("학번");
-	private JTextField input_sn = new JTextField(15);
+	private JTextField input_sn = new JTextField(30);
 	private JLabel StudentPassword = new JLabel("비밀번호");
-	private JTextField input_sp = new JTextField(15);
+	private JTextField input_sp = new JTextField(30);
 	private JButton btn_rogin = new JButton("로그인");
 	private JButton btn_home = new JButton("홈");
-	private JButton keyborad_sn = new JButton("키보드1");
-	private JButton keyborad_sp = new JButton("키보드2");
-	private JPanel p1 = new JPanel();
-	private JPanel p2 = new JPanel();
-	
+	private JButton keyborad_sn = new JButton("입력1");
+	private JButton keyborad_sp = new JButton("입력2");
+
 	public login() {
-		
 		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Container con = getContentPane(); 
-		
-		GridLayout grid = new GridLayout(7,1);
-		grid.setVgap(10);
-		con.setLayout(grid);
-		
-		p1.setLayout(new FlowLayout());
-		p2.setLayout(new FlowLayout());
-		
-		title.setHorizontalAlignment(NORMAL);
-		StudentNumber.setHorizontalAlignment(NORMAL);
-		StudentPassword.setHorizontalAlignment(NORMAL);
-		
-		keyborad_sn.setSize(10,50);
-		keyborad_sp.setSize(10,50);
-		
+		Container con = getContentPane();
+		con.setBackground(new Color(245, 245, 245));
+		con.setLayout(null);
+
+		// 폰트
+		Font font_all = new Font("NanumSquare", Font.BOLD, 25);
+
+		// 상단 라벨
+		JLabel label = new JLabel("로그인");
+		label.setSize(700, 100);
+		label.setLocation(0, 0);
+		label.setHorizontalAlignment(JLabel.CENTER);
+		label.setOpaque(true);
+		label.setBackground(new Color(255, 204, 153));
+
+		//Font big_font = new Font("a가을운동회M", Font.BOLD, 45);
+		//Font big_font = new Font("a굴림헤드B", Font.BOLD, 45);
+		//Font big_font = new Font("a시나브로M", Font.BOLD, 45);
+		//Font big_font = new Font("a아시아헤드4", Font.BOLD, 45);
+		Font big_font = new Font("a옛날사진관4", Font.BOLD, 45);
+		label.setFont(big_font);
+
+		// 라벨 사이즈 및 폰트 지정
+		StudentNumber.setSize(90, 30);
+		StudentNumber.setFont(font_all);
+		StudentPassword.setSize(180, 30);
+		StudentPassword.setFont(font_all);
+		input_sn.setSize(410, 62);
+		input_sp.setSize(410, 62);
+
+		// 위치 설정
+		StudentNumber.setLocation(45, 265);
+		StudentPassword.setLocation(25, 365);
+		input_sn.setLocation(142, 250);
+		input_sp.setLocation(142, 350);
+
+		//키보드 버튼 설정(사이즈, 위치, 색, 레이아웃, 글꼴)
+		keyborad_sn.setSize(110,62);
+		keyborad_sp.setSize(110,62);
+
+		keyborad_sn.setLocation(560, 250);
+		keyborad_sp.setLocation(560, 350);
+
+		keyborad_sn.setBackground(new Color(255, 153, 102));
+		keyborad_sp.setBackground(new Color(255, 153, 102));
+
+		keyborad_sn.setBorderPainted(false);
+		keyborad_sp.setBorderPainted(false);
+
+		keyborad_sn.setFont(font_all);
+		keyborad_sp.setFont(font_all);
+
+		keyborad_sn.setForeground(new Color(255,255,255));
+		keyborad_sp.setForeground(new Color(255,255,255));
+
+		// 로그인 버튼
+		Font font_rogin = new Font("NanumSquare", Font.BOLD, 20);
+		btn_rogin.setBackground(new Color(255, 153, 51));
+		btn_rogin.setFont(font_rogin);
+		btn_rogin.setForeground(new Color(255,255,255));
+		btn_rogin.setBorderPainted(false);
+		btn_rogin.setSize(410, 62);
+		btn_rogin.setLocation(142, 465);
+
+		//홈버튼
+		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		Image homeimg = homeIcon.getImage();
+		homeimg = homeimg.getScaledInstance(52, 52,  java.awt.Image.SCALE_SMOOTH);
+		homeIcon = new ImageIcon(homeimg);
+		btn_home = new JButton("HOME", homeIcon);
+		btn_home.setBackground(new Color(204, 204, 204));
+		btn_home.setFont(font_all);
+		btn_home.setForeground(new Color(255,255,255));
+		btn_home.setBorderPainted(false);
+		btn_home.setSize(210, 100);
+		btn_home.setLocation(245, 640);
+
+		// 리스너 추가
 		btn_rogin.addActionListener(new rogin_ActionListener());
 		btn_home.addActionListener(new inActionListener());
 		keyborad_sn.addActionListener(new keyboardActionListener());
 		keyborad_sp.addActionListener(new keyboardActionListener());
-		
-		p1.add(input_sn);
-		p1.add(keyborad_sn);
-		
-		p2.add(input_sp);
-		p2.add(keyborad_sp);
-		
-		con.add(title);
-		con.add(StudentNumber);
-		con.add(p1);
-		con.add(StudentPassword);
-		con.add(p2);
-		con.add(btn_rogin);
-		con.add(btn_home);	
 
-		setSize(300, 600);
+		// 추가
+		con.add(label);
+		con.add(StudentNumber);
+		con.add(input_sn);
+		con.add(StudentPassword);
+		con.add(input_sp);
+		con.add(keyborad_sn);
+		con.add(keyborad_sp);
+		con.add(btn_rogin);
+		con.add(btn_rogin);
+		con.add(btn_home);
+
+		setSize(700, 800);
 		setVisible(true);
 	}
 	
@@ -73,16 +130,16 @@ public class login extends JFrame {
 			}
 			
 			else if(id != null && pw != null) {
-				if(id.equals("test") && pw.equals("test1")) {
-					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
-					new borrow();
-					dispose();
-					return;
-					}
-				else
-					JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
-				/*
-				if(db.logincheck(id, pw)) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
+//				if(id.equals("test") && pw.equals("test1")) {
+//					JOptionPane.showMessageDialog(null, "로그인 성공", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
+//					new borrow();
+//					dispose();
+//					return;
+//					}
+//				else
+//					JOptionPane.showMessageDialog(null, "로그인 실패", "로그인 확인!", JOptionPane.DEFAULT_OPTION);
+
+				if(db.logincheck(id, pw) == true) {	//이 부분이 데이터베이스에 접속해 로그인 정보를 확인하는 부분이다.
 					System.out.println("로그인 성공");
 					JOptionPane.showMessageDialog(null, "로그인에 성공하였습니다");
 					// 대출, 예약, 연장 총 화면으로 넘어가기
@@ -91,8 +148,7 @@ public class login extends JFrame {
 					System.out.println("로그인 실패 > 로그인 정보 불일치");
 					JOptionPane.showMessageDialog(null, "로그인에 실패하였습니다");
 				}
-				*/
-			}
+            }
 		}
 	}
 	
