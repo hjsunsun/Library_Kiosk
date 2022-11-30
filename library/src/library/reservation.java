@@ -3,65 +3,109 @@ package library;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import library.borrow.inActionListener;
-import library.login.keyBorad1;
-import library.login.keyBorad2;
-import library.login.keyBorad1.inputkey_ActionListener;
+
 
 public class reservation extends JFrame {
 	Database db = new Database();
 	private JPanel p1 = new JPanel();
-
 	private JButton btn1 = new JButton("대출");
 	private JButton btn2 = new JButton("예약");
 	private JButton btn3 = new JButton("연장");
 	private JButton btn_home = new JButton("홈");
-
 	private JPanel MPanel = new JPanel();
-	private JLabel all = new JLabel("전체 검색");
-	private JTextField tfall = new JTextField(15);
-	private JButton sBtn = new JButton("검색");
-	private JButton keyborad_sn = new JButton("키보드");
-
+	private JTextField tf = new JTextField(18);
+	private JButton keyborad_sn = new JButton("입력");
+	private JButton search = new JButton("전체 검색");
+	private JLabel lb = new JLabel("예약가능 여부를 확인하고 표를 클릭하여 예약하세요.");
+	private JButton reserv = new JButton("예약");
 	private JTextArea db_connect = new JTextArea("db연동");
 
 	public reservation() {
 		setTitle("예약");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container c = getContentPane();
+		c.setLayout(null);
 
-		GridLayout grid = new GridLayout(5, 1);
-		grid.setVgap(10);
-		c.setLayout(grid);
-
-		GridLayout grid1 = new GridLayout(1, 3);
-		p1.setLayout(grid1);
-		MPanel.setLayout(new FlowLayout());
-
+		// 리스너 달기
 		btn1.addActionListener(new inActionListener());
 		btn2.addActionListener(new inActionListener());
 		btn3.addActionListener(new inActionListener());
 		keyborad_sn.addActionListener(new keyboardActionListener());
 		btn_home.addActionListener(new inActionListener());
 
-		p1.add(btn1);
-		p1.add(btn2);
-		p1.add(btn3);
-		
-		all.setHorizontalAlignment(NORMAL);
+		// 버튼 설정
+		btn1.setLocation(1, 0);
+		btn2.setLocation(233, 0);
+		btn3.setLocation(466, 0);
 
-		MPanel.add(tfall);
+		btn1.setSize(233, 100);
+		btn2.setSize(233, 100);
+		btn3.setSize(233, 100);
+		btn1.setBackground(Color.white);
+		btn2.setBackground(new Color(255, 204, 153));
+		btn3.setBackground(Color.white);
+
+		Font big_font = new Font("NanumSquare", Font.BOLD, 30);
+		btn1.setFont(big_font);
+		btn2.setFont(big_font);
+		btn3.setFont(big_font);
+
+		// 예약할 도서 검색하는 패널 설정
+		MPanel.add(tf);
 		MPanel.add(keyborad_sn);
-		MPanel.add(sBtn);
-		MPanel.setSize(300, 300);
+		MPanel.add(search);
+		MPanel.setSize(696, 62);
+		MPanel.setLocation(3, 150);
 
-		c.add(p1);
-		c.add(all);
+		Font plain_font = new Font("NanumSquare", Font.PLAIN, 25);
+		lb.setFont(plain_font);
+		tf.setFont(plain_font);
+		keyborad_sn.setFont(plain_font);
+		search.setFont(plain_font);
+		keyborad_sn.setForeground(new Color(255, 255, 255));
+		search.setForeground(new Color(255, 255, 255));
+
+		// 예약 방법 알려주는 라벨 설정
+		lb.setHorizontalAlignment(NORMAL); // 라벨 가운데 정렬
+		lb.setLocation(56, 250);
+		lb.setSize(588, 34);
+
+		// 예약버튼
+		reserv.setFont(big_font);
+		reserv.setForeground(new Color(255, 255, 255));
+		reserv.setBackground(new Color(255, 153, 051));
+		reserv.setSize(210, 100);
+		reserv.setLocation(128, 670);
+
+		// 홈버튼
+		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		Image homeimg = homeIcon.getImage();
+		homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH);
+		homeIcon = new ImageIcon(homeimg);
+
+		JButton btn_home = new JButton("Home", homeIcon);
+		btn_home.setBackground(Color.gray);
+
+		btn_home.setFont(big_font);
+		btn_home.setForeground(new Color(255, 255, 255));
+
+		btn_home.setSize(210, 100);
+		btn_home.setLocation(363, 670);
+
+		c.add(btn1);
+		c.add(btn2);
+		c.add(btn3);
 		c.add(MPanel);
+		c.add(lb);
 		c.add(db_connect);
 		c.add(btn_home);
+		c.add(reserv);
 
-		setSize(300, 600);
+		keyborad_sn.setBackground(new Color(255, 153, 102));
+		search.setBackground(new Color(255, 153, 051));
+
+
+		setSize(700, 800);
 		setVisible(true);
 	}
 
@@ -77,7 +121,7 @@ public class reservation extends JFrame {
 			} else if (b.getText().equals("연장")) {
 				new extension();
 				setVisible(false);
-			} else if (b.getText().equals("홈")) {
+			} else if (b.getText().equals("Home")) {
 				new library_main();
 				db.logout();
 				dispose();
@@ -87,7 +131,7 @@ public class reservation extends JFrame {
 
 	class sActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String all = tfall.getText().trim();
+			String all = tf.getText().trim();
 
 			if (all.equals("-")) { // 검색한 도서 db에 없는 경우(if문 조건 수정 필요)
 				JOptionPane.showMessageDialog(null, "해당 도서가 없습니다.", "도서 검색", JOptionPane.ERROR_MESSAGE);
@@ -98,46 +142,77 @@ public class reservation extends JFrame {
 		}
 	}
 
-	class keyboardActionListener implements ActionListener {		
+	class keyboardActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			if (b.getText().equals("키보드1"))	{
+			if (b.getText().equals("입력")) {
 				new keyBorad();
-				
+
 			}
 		}
 	}
-	
+
 	class keyBorad extends JFrame {
 		private JPanel p1 = new JPanel();
+		private JPanel p2_KEY = new JPanel();
 		public JTextArea input = new JTextArea();
-		private JButton[] btn_key = new JButton[38];
-		private String[] key = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " q", "w", "e", "r", "t", "y", "u",
-				"i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m",
-				"shift_A", "입력" };
-		private String[] shift_key = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", " Q", "W", "E", "R", "T", "Y",
+		private JButton[] btn_key = new JButton[40];
+		private String[] key = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " q", "w", "e", "r", "t", "y", "u", "i",
+				"o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m", "shift_A", "특수기호",
+				"<HTML><body><center>모두<br>지우기</center></body></HTML>", "입력"};
+		private String[] shift_key = {" Q", "W", "E", "R", "T", "Y",
 				"U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M",
-				"shift_a", "입력" };
+				"shift_a"};
+		private String[] special_key = {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "숫자"};
 
 		public keyBorad() {
 			setTitle("키보드");
 			Container con = getContentPane();
-			con.setLayout(new FlowLayout());
+			con.setBackground(Color.WHITE);
+			con.setLayout(null);
 
-			GridLayout grid = new GridLayout(6, 7);
-			grid.setVgap(2);
-			p1.setLayout(grid);
+			// 상단라벨
+			JLabel label = new JLabel("학번 입력 키보드");
+			label.setSize(700, 50);
+			label.setLocation(0, 0);
+			label.setHorizontalAlignment(JLabel.CENTER);
+			label.setOpaque(true);
+			label.setBackground(new Color(255, 204, 153));
+			Font big_font = new Font("a옛날사진관4", Font.BOLD, 30);
+			label.setFont(big_font);
+
+			// 입력확인창
+			p1.setLayout(new FlowLayout());
+			p1.setBackground(Color.WHITE);
+			p1.add(input);
+			p1.setSize(700, 30);
+			p1.setLocation(0, 55);
+
+			// 입력 글씨 글꼴 및 글씨 크기
+			Font font1 = new Font("a옛날사진관2", Font.BOLD, 20);
+			input.setFont(font1);
+			input.setSize(100, 50);
+
+			// 키패드
+			GridLayout grid = new GridLayout(5, 8);
+			grid.setVgap(5);
+			p2_KEY.setBackground(Color.WHITE);
+			p2_KEY.setLayout(grid);
+			p2_KEY.setSize(680, 200);
+			p2_KEY.setLocation(4, 90);
 
 			for (int i = 0; i < key.length; ++i) {
 				btn_key[i] = new JButton(key[i]);
 				btn_key[i].addActionListener(new inputkey_ActionListener());
-				p1.add(btn_key[i]);
+				btn_key[i].setBackground(new Color(255, 229, 216));
+				p2_KEY.add(btn_key[i]);
 			}
 
-			con.add(input);
+			con.add(label);
 			con.add(p1);
+			con.add(p2_KEY);
 
-			setSize(600, 300);
+			setSize(700, 330);
 			setVisible(true);
 		}
 
@@ -291,16 +366,31 @@ public class reservation extends JFrame {
 					input.append("N");
 				} else if (b.getText().equals("M")) {
 					input.append("M");
+				} else if (b.getText().equals("<HTML><body><center>모두<br>지우기</center></body></HTML>")) {
+					input.setText("");
 				} else if (b.getText().equals("shift_A")) {
-					for (int i = 0; i < btn_key.length; ++i) {
-						btn_key[i].setText(shift_key[i]);
+					int j = 0;
+					for (int i = 10; i < 37; ++i) {
+						btn_key[i].setText(shift_key[j]);
+						++j;
 					}
 				} else if (b.getText().equals("shift_a")) {
-					for (int i = 0; i < btn_key.length; ++i) {
+					for (int i = 10; i < 37; ++i) {
 						btn_key[i].setText(key[i]);
 					}
+					btn_key[36].setText(key[36]);
+				} else if (b.getText().equals("특수기호")) {
+					for (int i = 0; i < 10; ++i) {
+						btn_key[i].setText(special_key[i]);
+					}
+					btn_key[37].setText(special_key[10]);
+				} else if (b.getText().equals("숫자")) {
+					for (int i = 0; i < 10; ++i) {
+						btn_key[i].setText(key[i]);
+					}
+					btn_key[37].setText(key[37]);
 				} else if (b.getText().equals("입력")) {
-					tfall.setText(input.getText());
+					tf.setText(input.getText());
 					dispose();
 				}
 			}
