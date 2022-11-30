@@ -1,12 +1,12 @@
 package library;
-//dispose();오케이 버튼에서 이거 안되는듯?
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 
 public class library_main extends JFrame {
-	private ImageIcon adminIcon = new ImageIcon("images/dgurogo.png");
-	private ImageIcon backIcon = new ImageIcon("images/dgurogo2.png");
+	private ImageIcon adminIcon = new ImageIcon("library/images/dgurogo.png");
+	private ImageIcon backIcon = new ImageIcon("library/images/dgurogo2.png");
 	private JLabel title = new JLabel("<HTML><body><center>동국대학교 중앙도서관<br>키오스크</center></body></HTML>");
 	private MyDialog password;
 	// 생성자
@@ -134,6 +134,7 @@ public class library_main extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			if (b.getText().equals("<HTML><body><center>로그인<br>(대출/연장/예약)</center></body></HTML>")) {
+
 				new login();
 				dispose();
 			} else if (b.getText().equals("반납")) {
