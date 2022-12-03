@@ -9,6 +9,8 @@ public class library_main extends JFrame {
 	private ImageIcon backIcon = new ImageIcon("library/images/dgurogo2.png");
 	private JLabel title = new JLabel("<HTML><body><center>동국대학교 중앙도서관<br>키오스크</center></body></HTML>");
 	private MyDialog password;
+	static Database db = new Database();
+
 	// 생성자
 
 	public library_main() {
@@ -145,6 +147,7 @@ public class library_main extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		db.logout();
 		new library_main();
 		new Database();
 	}

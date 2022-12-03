@@ -57,7 +57,7 @@ public class reservation extends JFrame {
 		MPanel.setSize(696, 62);
 		MPanel.setLocation(3, 150);
 
-		Font plain_font = new Font("NanumSquare", Font.PLAIN, 25);
+		Font plain_font = new Font("NanumSquare", Font.PLAIN, 20);
 		lb.setFont(plain_font);
 		tf.setFont(plain_font);
 		keyborad_sn.setFont(plain_font);
@@ -78,7 +78,7 @@ public class reservation extends JFrame {
 		reserv.setLocation(128, 670);
 
 		// 홈버튼
-		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		ImageIcon homeIcon = new ImageIcon("library/images/home.png");
 		Image homeimg = homeIcon.getImage();
 		homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);

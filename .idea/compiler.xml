@@ -3,4 +3,9 @@
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Eclipse" />
   </component>
+  <component name="EclipseCompilerSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="library" options="--add-exports java.net.http/jdk.internal.net.http.common=ALL-UNNAMED" />
+    </option>
+  </component>
 </project>

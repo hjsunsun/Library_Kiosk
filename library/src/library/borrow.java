@@ -115,9 +115,9 @@ public class borrow extends JFrame{
 				new extension();
 				setVisible(false);
 			}
-			else if (b.getText().equals("Home"))   {
-				new library_main();
+			else if (b.getText().equals("Home"))  {
 				db.logout();
+				new library_main();
 				dispose();
 			}
 		}
@@ -129,15 +129,8 @@ public class borrow extends JFrame{
 				JOptionPane.showMessageDialog(null, "도서 ID를 입력해주세요.", "도서 대출 실패", JOptionPane.ERROR_MESSAGE);
 			}
 			else if(book != null) {
-				int num = JOptionPane.showConfirmDialog(null, "대출하시겠습니까?", "대출", JOptionPane.YES_NO_OPTION);
-				if(num == JOptionPane.CLOSED_OPTION) {
-					new borrow();
-					dispose();
-					return;
-				}
-				else if(num == JOptionPane.YES_OPTION) {
-					JOptionPane.showMessageDialog(null, "대출이 완료되었습니다.", "대출 성공", JOptionPane.INFORMATION_MESSAGE);
-				}
+				db.borrow(book);
+
 			}
 		}
 	}
