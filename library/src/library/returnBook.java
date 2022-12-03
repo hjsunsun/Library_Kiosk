@@ -13,6 +13,7 @@ public class returnBook extends JFrame  {
    JTextField bookID = new JTextField();
    JButton enterBtn = new JButton("반납");
    JButton btn_home = new JButton("홈");
+   Database db = new Database();
 
    public returnBook() {
       setTitle("반납");
@@ -99,7 +100,7 @@ public class returnBook extends JFrame  {
             int result = JOptionPane.showConfirmDialog(null,"["+ bookID.getText()+"]\n반납하시겠습니까?" , "도서 반납", JOptionPane.YES_NO_OPTION );
             if(result == JOptionPane.YES_OPTION) {
                JOptionPane.showMessageDialog(null, "반납이 완료되었습니다.", "반납", JOptionPane.DEFAULT_OPTION);
-
+               db.returnBook(bookID.getText().trim());
                //반납 시 필요한 쿼리 작성
                //1. 도서테이블의 해당 도서 대출가능여부 Y로 변경 (대여테이블에서 땡겨오기)
                //2. 회원테이블의 대출가능권수 +1 (대여테이블에서 땡겨오기)

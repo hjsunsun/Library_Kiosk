@@ -2,9 +2,6 @@ package library;
 
 import javax.swing.*;
 import java.sql.*;
-import java.awt.*;
-
-import static jdk.internal.net.http.common.Utils.close;
 
 
 public class Database {
@@ -168,6 +165,38 @@ public class Database {
 
 		} catch(Exception e) {
 			System.out.println("대여 실패 > " + e.toString());
+		}
+	}
+
+	/* 반납 */
+	void returnBook(String _bId){
+		String bookId = _bId;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		PreparedStatement ps3 = null;
+		try {
+			String checkId = "SELECT 회원아이디 FROM 학생 WHERE 대출가능권수 < 10";
+			ResultSet resultId = stmt.executeQuery(checkId);
+
+			String checkingStr = "DELETE FROM 대여 WHERE 도서ID = "+bookId+";";
+
+			while(resultId.next()) {
+				String checkingStr2 = "UPDATE\n" +
+						"    학생 as A, 대여 as B\n" +
+						"SET\n" +
+						"    A.대출가능권수 = A.대출가능권수 + 1\n" +
+						"WHERE\n" +
+						"\tA.회원아이디 = B.`회원학번` and A.회원아이디 =" + resultId.getString(1) + ";";
+				ps2 = con.prepareStatement(checkingStr);
+				ps3 = con.prepareStatement(checkingStr2);
+
+				ps2.executeUpdate();
+				ps3.executeUpdate();
+			}
+
+
+		} catch(Exception e) {
+			System.out.println("반납 실패 > " + e.toString());
 		}
 	}
 
