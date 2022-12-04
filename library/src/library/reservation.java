@@ -124,7 +124,7 @@ public class reservation extends JFrame {
 		btn2.addActionListener(new inActionListener());
 		btn3.addActionListener(new inActionListener());
 		keyborad_sn.addActionListener(new keyboardActionListener());
-		btn_home.addActionListener(new inActionListener());
+		/*
 		search.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +134,7 @@ public class reservation extends JFrame {
 				} else {
 
 					try {
-					     
+
 						for(int i = 0; i < Book_model.getRowCount();i++ ) {
 							Book_model.removeRow(i);
 						}
@@ -150,17 +150,17 @@ public class reservation extends JFrame {
 					      //3.
 					      jPanel_Book.add(Book_scrollPane1);
 					      c.add(jPanel_Book);
-					     */ 
-					     /* 
+					     */
+					     /*
 						DefaultTableModel dm = (DefaultTableModel) Book_table.getModel();
 						int rowCount = dm.getRowCount();
 						//Remove rows one by one from the end of the table
 						for (int i = rowCount - 1; i >= 0; i--) {
 						    dm.removeRow(i);
 						}
-						
+
 						//Book_model.setNumRows(0);
-						*/
+
 						String temp = "select * from 도서 where lower(`도서명`) LIKE '%"+value+"%';";
 						System.out.println(temp);
 						ResultSet r = stmt.executeQuery(temp);
@@ -171,9 +171,9 @@ public class reservation extends JFrame {
 									r.getString("저자(역자)"), r.getString("출판사"), r.getString("예약가능여부") };
 
 							Book_model.addRow(data);
-							
+
 						}
-						
+
 
 					} catch (Exception ex) {
 						System.out.println("MySQL 서버 연동 실패 > " + ex.toString());
@@ -183,7 +183,8 @@ public class reservation extends JFrame {
 
 			}
 
-		});
+		}); */
+
 
       // 예약버튼
       reserv.setFont(big_font);
@@ -243,7 +244,7 @@ public class reservation extends JFrame {
 		});
 
       // 홈버튼
-      ImageIcon homeIcon = new ImageIcon("images/home.png");
+      ImageIcon homeIcon = new ImageIcon("library/images/home.png");
       Image homeimg = homeIcon.getImage();
       homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH);
       homeIcon = new ImageIcon(homeimg);
@@ -253,7 +254,7 @@ public class reservation extends JFrame {
 
       btn_home.setFont(big_font);
       btn_home.setForeground(new Color(255, 255, 255));
-
+      btn_home.addActionListener(new inActionListener());
       btn_home.setSize(210, 100);
       btn_home.setLocation(363, 670);
 

@@ -95,7 +95,7 @@ public class library_main extends JFrame {
 	}
 
 	class background extends JPanel {
-		private ImageIcon back_Image = new ImageIcon("images/back_img.png");
+		private ImageIcon back_Image = new ImageIcon("library/images/back_img.png");
 		private Image img = back_Image.getImage(); // 이미지 객체
 
 		public void paintComponent(Graphics g) {

@@ -42,7 +42,7 @@ public class returnBook extends JFrame  {
       bookID.setLocation(130, 315);
 
       // 라벨 사이즈 및 폰트 지정
-      Font font_all = new Font("a옛날사진관2", Font.BOLD, 25);
+      Font font_all = new Font("NanumSquare", Font.BOLD, 25);
       labelTitle.setSize(400, 30);
       labelTitle.setFont(font_all);
       labelTitle.setLocation(150, 200);
@@ -100,23 +100,17 @@ public class returnBook extends JFrame  {
             if(result == JOptionPane.YES_OPTION) {
                JOptionPane.showMessageDialog(null, "반납이 완료되었습니다.", "반납", JOptionPane.DEFAULT_OPTION);
                db.returnBook(bookID.getText().trim());
-               //반납 시 필요한 쿼리 작성
-               //1. 도서테이블의 해당 도서 대출가능여부 Y로 변경 (대여테이블에서 땡겨오기)
-               //2. 회원테이블의 대출가능권수 +1 (대여테이블에서 땡겨오기)
-               //3. 대여테이블의 해당 대여 행 삭제? or 대출 종료 여부 추가
 
             }
             else if(result == JOptionPane.NO_OPTION || result == JOptionPane.CLOSED_OPTION) {
                //No 혹은 창 종료 시 실행될 부분
             }
          }
-         else if(b.getText().equals("")) {
+         else if (b.getText().equals("Home"))   {
             //메인화면 이동
+            new library_main();
+            dispose();
          }
-         else if (b.getText().equals("Home"))	{
-				new library_main();
-				dispose();
-			}
 
       }
    }

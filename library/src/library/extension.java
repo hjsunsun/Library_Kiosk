@@ -74,7 +74,7 @@ public class extension extends JFrame {
 
 		// 테이블
 		// 1. 테이블 정보정의
-		String header[] = { "대여ID", "도서명", "대출일자", "반납가능일자", "연장횟수" };
+		String header[] = { "대여ID", "도서명", "대출일자", "반납가능일자", "연장가능횟수" };
 		String contents[][] = {};
 
 		// 2. jtable 클래스의 객체 생성
@@ -143,7 +143,7 @@ public class extension extends JFrame {
 		exten.setFont(big_font);
 
 		// 홈버튼 생성 및 설정
-		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		ImageIcon homeIcon = new ImageIcon("library/images/home.png");
 		Image homeimg = homeIcon.getImage();
 		homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);

@@ -77,7 +77,7 @@ public class login extends JFrame {
 		btn_rogin.setLocation(142, 465);
 
 		//홈버튼
-		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		ImageIcon homeIcon = new ImageIcon("library/images/home.png");
 		Image homeimg = homeIcon.getImage();
 		homeimg = homeimg.getScaledInstance(52, 52,  java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);

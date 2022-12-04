@@ -39,8 +39,8 @@ public class AdminPage extends JFrame {
 
 
 		//이미지아이콘 -> 이미지로 변경 후 크기조정
-		ImageIcon memberIcon = new ImageIcon("images/contact.png");
-		ImageIcon bookIcon = new ImageIcon("images/book (1).png");
+		ImageIcon memberIcon = new ImageIcon("library/images/contact.png");
+		ImageIcon bookIcon = new ImageIcon("library/images/book (1).png");
 		Image memberimg = memberIcon.getImage();
 		Image bookimg = bookIcon.getImage();
 		memberimg = memberimg.getScaledInstance(96, 96,  java.awt.Image.SCALE_SMOOTH);
@@ -77,7 +77,7 @@ public class AdminPage extends JFrame {
 
 		//(공통)홈버튼
 		//코드순서 이미지 사이즈 변경/ 홈버튼 생성, 배경변경/ 글꼴 변경, 글꼴 색변경/버튼크기, 위치변경/
-		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		ImageIcon homeIcon = new ImageIcon("library/images/home.png");
 		Image homeimg = homeIcon.getImage();
 		homeimg = homeimg.getScaledInstance(52, 52,  java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);

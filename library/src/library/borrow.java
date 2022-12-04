@@ -26,7 +26,6 @@ public class borrow extends JFrame{
 		btn1.addActionListener(new inActionListener());
 		btn2.addActionListener(new inActionListener());
 		btn3.addActionListener(new inActionListener());
-		btn_home.addActionListener(new inActionListener());
 
 		// 버튼 설정
 		btn1.setLocation(1,0);
@@ -71,14 +70,14 @@ public class borrow extends JFrame{
 		borrow.addActionListener(new search_ActionListener());
 
 		// 홈버튼
-		ImageIcon homeIcon = new ImageIcon("images/home.png");
+		ImageIcon homeIcon = new ImageIcon("library/images/home.png");
 		Image homeimg = homeIcon.getImage();
 		homeimg = homeimg.getScaledInstance(52, 52,  java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);
 
 		JButton btn_home = new JButton("Home",homeIcon);
 		btn_home.setBackground(Color.gray);
-
+		btn_home.addActionListener(new inActionListener());
 		btn_home.setFont(big_font);
 		btn_home.setForeground(new Color(255,255,255));
 
