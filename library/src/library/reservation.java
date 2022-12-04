@@ -16,12 +16,11 @@ public class reservation extends JFrame {
    private JButton btn1 = new JButton("대출");
    private JButton btn2 = new JButton("예약");
    private JButton btn3 = new JButton("연장");
-   private JButton btn_home = new JButton("홈");
    private JPanel MPanel = new JPanel();
    private JTextField tf = new JTextField(18);
    private JButton keyborad_sn = new JButton("입력");
    private JButton search = new JButton("전체 검색");
-   private JLabel lb = new JLabel("예약가능 여부를 확인하고 표를 클릭하여 예약하세요.");
+   private JLabel lb = new JLabel("예약가능 여부가 1일 때 표를 클릭 후 예약하세요.");
    private JButton reserv = new JButton("예약");
    private JTextArea db_connect = new JTextArea("db연동");
 
@@ -339,7 +338,7 @@ public class reservation extends JFrame {
          con.setLayout(null);
 
          // 상단라벨
-         JLabel label = new JLabel("학번 입력 키보드");
+         JLabel label = new JLabel("키보드");
          label.setSize(700, 50);
          label.setLocation(0, 0);
          label.setHorizontalAlignment(JLabel.CENTER);
