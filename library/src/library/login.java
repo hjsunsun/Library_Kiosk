@@ -15,7 +15,6 @@ public class login extends JFrame {
 	private JButton keyborad_sn = new JButton("입력1");	// 학번 입력 키보드 창 띄우는 버튼
 	private JButton keyborad_sp = new JButton("입력2");	//  입력 키보드 창 띄우는 버튼
 	private JButton btn_rogin = new JButton("로그인");
-	private JButton btn_home = new JButton("Home");
 
 	public login() {
 		setTitle("로그인");
@@ -82,7 +81,7 @@ public class login extends JFrame {
 		Image homeimg = homeIcon.getImage();
 		homeimg = homeimg.getScaledInstance(52, 52,  java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);
-		btn_home = new JButton("HOME", homeIcon);
+		JButton btn_home = new JButton("Home", homeIcon);
 		btn_home.setBackground(new Color(204, 204, 204));
 		btn_home.setFont(font_all);
 		btn_home.setForeground(new Color(255,255,255));
