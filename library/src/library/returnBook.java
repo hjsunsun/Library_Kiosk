@@ -12,7 +12,6 @@ public class returnBook extends JFrame  {
    JLabel labelId = new JLabel("도서 ID");
    JTextField bookID = new JTextField();
    JButton enterBtn = new JButton("반납");
-   JButton btn_home = new JButton("홈");
    Database db = new Database();
 
    public returnBook() {
@@ -66,7 +65,7 @@ public class returnBook extends JFrame  {
       Image homeimg = homeIcon.getImage();
       homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH);
       homeIcon = new ImageIcon(homeimg);
-      btn_home = new JButton("HOME", homeIcon);
+      JButton btn_home = new JButton("Home", homeIcon);
       btn_home.setBackground(new Color(204, 204, 204));
       btn_home.setFont(font_all);
       btn_home.setForeground(new Color(255, 255, 255));
@@ -114,7 +113,7 @@ public class returnBook extends JFrame  {
          else if(b.getText().equals("")) {
             //메인화면 이동
          }
-         else if (b.getText().equals("홈"))	{
+         else if (b.getText().equals("Home"))	{
 				new library_main();
 				dispose();
 			}
