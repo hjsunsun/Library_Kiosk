@@ -23,7 +23,7 @@ public class AdminPage extends JFrame {
 		label.setBackground(new Color(255,204,153));
 
 		//상단 폰트 생성, 폰트 라벨에 적용,
-		Font big_font =new Font("NanumSquare", Font.BOLD, 30);
+		Font big_font =new Font("a옛날사진관4", Font.BOLD, 30);
 		label.setFont(big_font);
 
 
@@ -139,11 +139,5 @@ public class AdminPage extends JFrame {
 
 			}
 		});
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new AdminPage();
-
 	}
 }
