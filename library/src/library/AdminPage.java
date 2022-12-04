@@ -23,7 +23,7 @@ public class AdminPage extends JFrame {
 		label.setBackground(new Color(255,204,153));
 
 		//상단 폰트 생성, 폰트 라벨에 적용,
-		Font big_font =new Font("NanumSquare", Font.BOLD, 30);
+		Font big_font =new Font("a옛날사진관4", Font.BOLD, 30);
 		label.setFont(big_font);
 
 
@@ -48,9 +48,6 @@ public class AdminPage extends JFrame {
 		memberIcon = new ImageIcon(memberimg);
 		bookIcon = new ImageIcon(bookimg);
 
-
-
-
 		//회원, 도서테이 확인,홈이동 할 수 있는 버튼 생성
 		JButton btn_member = new JButton("회원",memberIcon);
 		btn_member.setBackground(new Color(255,153,051));
@@ -66,7 +63,6 @@ public class AdminPage extends JFrame {
 		btn_book.setFont(big_font);
 		btn_member.setForeground(new Color(255,255,255));
 		btn_book.setForeground(new Color(255,255,255));
-
 
 		//버튼 크기 설정
 		btn_member.setSize(225, 225);
