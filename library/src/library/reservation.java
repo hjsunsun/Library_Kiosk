@@ -75,8 +75,8 @@ public class reservation extends JFrame {
 
       // 예약 방법 알려주는 라벨 설정
       lb.setHorizontalAlignment(NORMAL); // 라벨 가운데 정렬
-      lb.setLocation(56, 250);
-      lb.setSize(588, 34);
+      lb.setLocation(40, 250);
+      lb.setSize(600, 34);
 
       //테이블 넣을 패널 위치와 크기 설정
       JPanel jPanel_Book = new JPanel();
