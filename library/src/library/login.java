@@ -31,7 +31,7 @@ public class login extends JFrame {
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setOpaque(true);
 		label.setBackground(new Color(255, 204, 153));
-		Font big_font = new Font("NanumSquare", Font.BOLD, 45);
+		Font big_font = new Font("a옛날사진관4", Font.BOLD, 45);
 		label.setFont(big_font);
 
 		// 라벨 사이즈 및 폰트 지정
@@ -195,7 +195,7 @@ public class login extends JFrame {
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setOpaque(true);
 			label.setBackground(new Color(255, 204, 153));
-			Font big_font = new Font("NanumSquare", Font.BOLD, 30);
+			Font big_font = new Font("a옛날사진관4", Font.BOLD, 30);
 			label.setFont(big_font);
 
 			// 입력확인창
@@ -441,7 +441,7 @@ public class login extends JFrame {
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setOpaque(true);
 			label.setBackground(new Color(255, 204, 153));
-			Font big_font = new Font("NanumSquare", Font.BOLD, 30);
+			Font big_font = new Font("a옛날사진관4", Font.BOLD, 30);
 			label.setFont(big_font);
 
 			// 입력확인창
