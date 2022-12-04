@@ -57,10 +57,10 @@ public class extension extends JFrame {
 
 		// 연장 방법 알려주는 라벨 설정
 		lb.setHorizontalAlignment(NORMAL); // 라벨 가운데 정렬
-		lb.setLocation(56, 250);
-		lb.setSize(588, 34);
+		lb.setLocation(40, 250);
+		lb.setSize(600, 34);
 
-		Font plain_font = new Font("NanumSquare", Font.PLAIN, 25); // 폰트 객체 생성
+		Font plain_font = new Font("NanumSquare", Font.PLAIN, 20); // 폰트 객체 생성
 		id.setFont(plain_font);
 		name.setFont(plain_font);
 		idtf.setFont(plain_font);
