@@ -7,13 +7,15 @@ import javax.swing.*;
 public class login extends JFrame {
 	private JLabel title = new JLabel("동국대학교 중앙도서관 키오스크");
 	private JLabel StudentNumber = new JLabel("학번");
-	private JTextField input_sn = new JTextField(30);
 	private JLabel StudentPassword = new JLabel("비밀번호");
-	private JTextField input_sp = new JTextField(30);
+	
+	private JTextField input_sn = new JTextField(30);	// 학번 입력 필드
+	private JTextField input_sp = new JTextField(30);	// 비밀번호 입력 필드
+
+	private JButton keyborad_sn = new JButton("입력1");	// 학번 입력 키보드 창 띄우는 버튼
+	private JButton keyborad_sp = new JButton("입력2");	//  입력 키보드 창 띄우는 버튼
 	private JButton btn_rogin = new JButton("로그인");
-	private JButton btn_home = new JButton("홈");
-	private JButton keyborad_sn = new JButton("입력1");
-	private JButton keyborad_sp = new JButton("입력2");
+	private JButton btn_home = new JButton("Home");
 
 	public login() {
 		setTitle("로그인");
@@ -21,10 +23,7 @@ public class login extends JFrame {
 		Container con = getContentPane();
 		con.setBackground(new Color(245, 245, 245));
 		con.setLayout(null);
-
-		// 폰트
-		Font font_all = new Font("NanumSquare", Font.BOLD, 25);
-
+		
 		// 상단 라벨
 		JLabel label = new JLabel("로그인");
 		label.setSize(700, 100);
@@ -32,15 +31,11 @@ public class login extends JFrame {
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setOpaque(true);
 		label.setBackground(new Color(255, 204, 153));
-
-		//Font big_font = new Font("a가을운동회M", Font.BOLD, 45);
-		//Font big_font = new Font("a굴림헤드B", Font.BOLD, 45);
-		//Font big_font = new Font("a시나브로M", Font.BOLD, 45);
-		//Font big_font = new Font("a아시아헤드4", Font.BOLD, 45);
-		Font big_font = new Font("a옛날사진관4", Font.BOLD, 45);
+		Font big_font = new Font("NanumSquare", Font.BOLD, 45);
 		label.setFont(big_font);
 
 		// 라벨 사이즈 및 폰트 지정
+		Font font_all = new Font("NanumSquare", Font.BOLD, 25);
 		StudentNumber.setSize(90, 30);
 		StudentNumber.setFont(font_all);
 		StudentPassword.setSize(180, 30);
@@ -117,6 +112,7 @@ public class login extends JFrame {
 		setVisible(true);
 	}
 	
+	// input_sn과 input_sp에 입력된 정보과 db를 비교하여 로그인 가능 확인 후 실행
 	class rogin_ActionListener implements ActionListener {		
 		Database db = new Database();
 		public void actionPerformed(ActionEvent e) {
@@ -145,29 +141,34 @@ public class login extends JFrame {
 		}
 	}
 	
+	// 메인화면으로 이동
 	class inActionListener implements ActionListener {		
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();				
-			if (b.getText().equals("홈"))	{
+			if (b.getText().equals("Home"))	{
 				new library_main();
 				dispose();
 			}
 		}
 	}
 	
+	// 키보드로 창 뜨기
 	class keyboardActionListener implements ActionListener {		
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
+			// 학번 입력 키보드 창 띄우기
 			if (b.getText().equals("입력1"))	{
 				new keyBorad1();
 				
 			}
-			else if (b.getText().equals("입력2"))	{
+			// 비밀번호 입력 키보드 창 띄우기
+			else if (b.getText().equals("입력2"))  { 
 				new keyBorad2();
 			}
 		}
 	}
 
+	// 학번 입력 키보드로 입력버튼 클릭 시 input_sn에 입력된 학번이 들어감
 	class keyBorad1 extends JFrame {
 		private JPanel p1 = new JPanel();
 		private JPanel p2_KEY = new JPanel();
@@ -182,7 +183,7 @@ public class login extends JFrame {
 		private String[] special_key = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "숫자"};
 
 		public keyBorad1() {
-			setTitle("키보드");
+			setTitle("학번 입력 키보드");
 			Container con = getContentPane();
 			con.setBackground(Color.WHITE);
 			con.setLayout(null);
@@ -194,7 +195,7 @@ public class login extends JFrame {
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setOpaque(true);
 			label.setBackground(new Color(255, 204, 153));
-			Font big_font = new Font("a옛날사진관4", Font.BOLD, 30);
+			Font big_font = new Font("NanumSquare", Font.BOLD, 30);
 			label.setFont(big_font);
 
 			// 입력확인창
@@ -205,7 +206,7 @@ public class login extends JFrame {
 			p1.setLocation(0, 55);
 
 			// 입력 글씨 글꼴 및 글씨 크기
-			Font font1 = new Font("a옛날사진관2", Font.BOLD, 20);
+			Font font1 = new Font("NanumSquare", Font.BOLD, 20);
 			input.setFont(font1);
 			input.setSize(100, 50);
 
@@ -383,29 +384,29 @@ public class login extends JFrame {
 				} else if (b.getText().equals("M")) {
 					input.append("M");
 				} else if (b.getText().equals("<HTML><body><center>모두<br>지우기</center></body></HTML>")) {
-					input.setText("");
-				} else if (b.getText().equals("shift_A")) {
+					input.setText(""); // 전체 지우기
+				} else if (b.getText().equals("shift_A")) { // 소문자를 대문자로 변경
 					int j=0;
 					for (int i = 10; i < 37; ++i) {
 						btn_key[i].setText(shift_key[j]);
 						++j;
 					}
-				} else if (b.getText().equals("shift_a")) {
+				} else if (b.getText().equals("shift_a")) { // 대문자를 소문자로 변경
 					for (int i = 10; i < 37; ++i) {
 						btn_key[i].setText(key[i]);
 					}
 					btn_key[36].setText(key[36]);
-				} else if (b.getText().equals("특수기호")) {
+				} else if (b.getText().equals("특수기호")) { // 숫자를 특수기호로 변경
 					for (int i = 0; i < 10; ++i) {
 						btn_key[i].setText(special_key[i]);
 					}
 					btn_key[37].setText(special_key[10]);
-				} else if (b.getText().equals("숫자")) {
+				} else if (b.getText().equals("숫자")) { // 특수기호를 숫자로 변경
 					for (int i = 0; i < 10; ++i) {
 						btn_key[i].setText(key[i]);
 					}
 					btn_key[37].setText(key[37]);
-				} else if (b.getText().equals("입력")) {
+				} else if (b.getText().equals("입력")) { // 키보드 화면에 입력된 값을 input_sn에 입력
 					input_sn.setText(input.getText());
 					dispose();
 				}
@@ -413,6 +414,7 @@ public class login extends JFrame {
 		}
 	}
 
+	// 비밀번호 입력 키보드로 입력버튼 클릭 시 input_sp에 입력된 학번이 들어감
 	class keyBorad2 extends JFrame {
 		private JPanel p1 = new JPanel();
 		private JPanel p2_KEY = new JPanel();
@@ -427,7 +429,7 @@ public class login extends JFrame {
 		private String[] special_key = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "숫자"};
 
 		public keyBorad2() {
-			setTitle("키보드");
+			setTitle("비밀번호 키보드");
 			Container con = getContentPane();
 			con.setBackground(Color.WHITE);
 			con.setLayout(null);
@@ -439,7 +441,7 @@ public class login extends JFrame {
 			label.setHorizontalAlignment(JLabel.CENTER);
 			label.setOpaque(true);
 			label.setBackground(new Color(255, 204, 153));
-			Font big_font = new Font("a옛날사진관4", Font.BOLD, 30);
+			Font big_font = new Font("NanumSquare", Font.BOLD, 30);
 			label.setFont(big_font);
 
 			// 입력확인창
@@ -450,7 +452,7 @@ public class login extends JFrame {
 			p1.setLocation(0, 55);
 
 			// 입력 글씨 글꼴 및 글씨 크기
-			Font font1 = new Font("a옛날사진관2", Font.BOLD, 20);
+			Font font1 = new Font("NanumSquare", Font.BOLD, 20);
 			input.setFont(font1);
 			input.setSize(100, 50);
 
@@ -629,28 +631,28 @@ public class login extends JFrame {
 					input.append("M");
 				} else if (b.getText().equals("<HTML><body><center>모두<br>지우기</center></body></HTML>")) {
 					input.setText("");
-				} else if (b.getText().equals("shift_A")) {
+				} else if (b.getText().equals("shift_A")) { // 소문자를 대문자로 변경
 					int j=0;
 					for (int i = 10; i < 37; ++i) {
 						btn_key[i].setText(shift_key[j]);
 						++j;
 					}
-				} else if (b.getText().equals("shift_a")) {
+				} else if (b.getText().equals("shift_a")) { // 대문자를 소문자로 변경
 					for (int i = 10; i < 37; ++i) {
 						btn_key[i].setText(key[i]);
 					}
 					btn_key[36].setText(key[36]);
-				} else if (b.getText().equals("특수기호")) {
+				} else if (b.getText().equals("특수기호")) { // 숫자를 특수기호로 변경
 					for (int i = 0; i < 10; ++i) {
 						btn_key[i].setText(special_key[i]);
 					}
 					btn_key[37].setText(special_key[10]);
-				} else if (b.getText().equals("숫자")) {
+				} else if (b.getText().equals("숫자")) { // 특수기호를 숫자로 변경
 					for (int i = 0; i < 10; ++i) {
 						btn_key[i].setText(key[i]);
 					}
 					btn_key[37].setText(key[37]);
-				} else if (b.getText().equals("입력")) {
+				} else if (b.getText().equals("입력")) { // 키보드 화면에 입력된 값을 input_sp에 입력
 					input_sp.setText(input.getText());
 					dispose();
 				}
