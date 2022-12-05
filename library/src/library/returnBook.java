@@ -8,10 +8,10 @@ import javax.swing.*;
 import library.extension.inActionListener;
 
 public class returnBook extends JFrame  {
-   JLabel labelTitle = new JLabel("반납할 도서ID를 입력해주세요.");
-   JLabel labelId = new JLabel("도서 ID");
-   JTextField bookID = new JTextField();
-   JButton enterBtn = new JButton("반납");
+   JLabel labelTitle = new JLabel("반납할 도서ID를 입력해주세요."); // 반납 안내 문구 label 추가
+   JLabel labelId = new JLabel("도서 ID"); // 도서 ID 라벨 추가
+   JTextField bookID = new JTextField(); // 도서 ID 입력할 TextField
+   JButton enterBtn = new JButton("반납"); // 반납 버튼
    Database db = new Database();
 
    public returnBook() {
@@ -29,11 +29,6 @@ public class returnBook extends JFrame  {
       label.setHorizontalAlignment(JLabel.CENTER);
       label.setOpaque(true);
       label.setBackground(new Color(255, 204, 153));
-
-      // Font big_font = new Font("a가을운동회M", Font.BOLD, 45);
-      // Font big_font = new Font("a굴림헤드B", Font.BOLD, 45);
-      // Font big_font = new Font("a시나브로M", Font.BOLD, 45);
-      // Font big_font = new Font("a아시아헤드4", Font.BOLD, 45);
       Font big_font = new Font("a옛날사진관4", Font.BOLD, 45);
       label.setFont(big_font);
 
@@ -92,12 +87,13 @@ public class returnBook extends JFrame  {
       setVisible(true);
 
    }
-   class inActionListener implements ActionListener {
+   class inActionListener implements ActionListener { // 버튼 누를 시 액션 리스너 설정
       public void actionPerformed(ActionEvent e) {
          JButton b = (JButton)e.getSource();
-         if (b.getText().equals("반납"))   {
+         if (b.getText().equals("반납"))   { // 반납 버튼 클릭시
             int result = JOptionPane.showConfirmDialog(null,"["+ bookID.getText()+"]\n반납하시겠습니까?" , "도서 반납", JOptionPane.YES_NO_OPTION );
-            if(result == JOptionPane.YES_OPTION) {
+            if(result == JOptionPane.YES_OPTION) { // Yes 클릭시
+                // 반납 완료 Dialog
                JOptionPane.showMessageDialog(null, "반납이 완료되었습니다.", "반납", JOptionPane.DEFAULT_OPTION);
                db.returnBook(bookID.getText().trim());
 

@@ -58,22 +58,23 @@ public class MemberPage extends JFrame {
 
 		c.add(jPanel_Member);
 
-		// db에 저장된 데이터-> 테이브로 보여주기
+		// db에 저장된 데이터-> 테이블로 보여주기
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
 			stmt = con.createStatement();
 
-			String sql = "select * from 학생;";
+			String sql = "select * from 학생;"; //학생 테이블 전체조회
 
-			ResultSet result = stmt.executeQuery(sql);
+			ResultSet result = stmt.executeQuery(sql); //조회쿼리 execute
 
 			while (result.next()) {
+				//한 행씩 가공하여 행으로 만듦
 				Object data[] = { result.getString("회원아이디"), result.getString("비밀번호"), result.getString("이름"),
 						result.getString("휴대전화"), result.getString("이메일"), result.getString("학과"),
 						result.getString("대출가능권수") };
 
-				Member_model.addRow(data);
+				Member_model.addRow(data); //행 추가
 			}
 
 		} catch (Exception e) {
