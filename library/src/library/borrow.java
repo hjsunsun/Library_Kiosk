@@ -8,13 +8,13 @@ import library.reservation.inActionListener;
 public class borrow extends JFrame{
 	Database db = new Database();
 	private JPanel pn = new JPanel();
-	private JButton btn1 = new JButton("대출");
-	private JButton btn2 = new JButton("예약");
-	private JButton btn3 = new JButton("연장");
-	private JLabel lb = new JLabel("대출할 도서ID를 입력해주세요.");
-	private JLabel bookId = new JLabel("도서ID");
-	private JTextField bookIdtf = new JTextField(18);
-	private JButton borrow = new JButton("대출");
+	private JButton btn1 = new JButton("대출"); // 상단 대출 버튼
+	private JButton btn2 = new JButton("예약"); // 상단 예약 버튼
+	private JButton btn3 = new JButton("연장"); // 상단 연장 버튼
+	private JLabel lb = new JLabel("대출할 도서ID를 입력해주세요."); // 안내 라벨 추가
+	private JLabel bookId = new JLabel("도서ID"); // 도서 ID 라벨 추가
+	private JTextField bookIdtf = new JTextField(18); // 도서 ID 입력하는 TextField 추가
+	private JButton borrow = new JButton("대출"); // 대출하기 버튼
 
 	public borrow() {
 		setTitle("대출");
@@ -75,6 +75,7 @@ public class borrow extends JFrame{
 		homeimg = homeimg.getScaledInstance(52, 52,  java.awt.Image.SCALE_SMOOTH);
 		homeIcon = new ImageIcon(homeimg);
 
+		// 홈버튼 생성 및 설정
 		JButton btn_home = new JButton("Home",homeIcon);
 		btn_home.setBackground(Color.gray);
 		btn_home.addActionListener(new inActionListener());
@@ -98,36 +99,36 @@ public class borrow extends JFrame{
 		setVisible(true);
 	}
 
-	class inActionListener implements ActionListener {
+	class inActionListener implements ActionListener { // 버튼 누를 때의 액션리스너 추가
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			if (b.getText().equals("대출"))   {
-				new borrow();
+			if (b.getText().equals("대출"))   { // 버튼명이 대출이라면
+				new borrow(); // 대출 페이지로 이동
 				dispose();
 			}
-			else if (b.getText().equals("예약")){
-				new reservation();
+			else if (b.getText().equals("예약")){ // 버튼명이 예약이라면
+				new reservation(); // 예약 페이지로 이동
 				setVisible(false);
 			}
-			else if (b.getText().equals("연장")){
-				new extension();
+			else if (b.getText().equals("연장")){ // 버튼명이 연장이라면
+				new extension(); // 연장 페이지로 이동
 				setVisible(false);
 			}
-			else if (b.getText().equals("Home"))  {
-				db.logout();
-				new library_main();
+			else if (b.getText().equals("Home"))  { // 버튼명이 Home이라면
+				db.logout(); // 로그아웃
+				new library_main(); // 메인 페이지로 이동
 				dispose();
 			}
 		}
 	}
 	class search_ActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String book = bookIdtf.getText().trim();
-			if(book.equals("-")){
+			String book = bookIdtf.getText().trim(); // 입력받은 도서ID
+ 			if(book.equals("-")){ // 입력받은 값이 없다면
 				JOptionPane.showMessageDialog(null, "도서 ID를 입력해주세요.", "도서 대출 실패", JOptionPane.ERROR_MESSAGE);
 			}
-			else if(book != null) {
-				db.borrow(book);
+			else if(book != null) { // 입력받은 값이 있다면
+				db.borrow(book); // db의 borrow메소드 호출
 
 			}
 		}
