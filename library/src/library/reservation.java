@@ -38,10 +38,10 @@ public class reservation extends JFrame {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       Container c = getContentPane();
       c.setLayout(null);
-
+      Font big_font = new Font("NanumSquare", Font.BOLD, 30); // 폰트 객체 생성
+      Font plain_font = new Font("NanumSquare", Font.PLAIN, 25); // 폰트 객체 생성
       
-
-      // 버튼 설정
+      // 대출, 연장, 예약 버튼 설정
       btn1.setLocation(1, 0);
       btn2.setLocation(233, 0);
       btn3.setLocation(466, 0);
@@ -49,15 +49,14 @@ public class reservation extends JFrame {
       btn1.setSize(233, 100);
       btn2.setSize(233, 100);
       btn3.setSize(233, 100);
-      btn1.setBackground(Color.white);
+      btn1.setBackground(Color.white); // 버튼 색상 설정
       btn2.setBackground(new Color(255, 204, 153));
       btn3.setBackground(Color.white);
 
-      Font big_font = new Font("NanumSquare", Font.BOLD, 30);
       btn1.setFont(big_font);
       btn2.setFont(big_font);
       btn3.setFont(big_font);
-
+      
       // 예약할 도서 검색하는 패널 설정
       MPanel.add(tf);
       MPanel.add(keyborad_sn);
@@ -65,12 +64,11 @@ public class reservation extends JFrame {
       MPanel.setSize(696, 62);
       MPanel.setLocation(3, 150);
 
-      Font plain_font = new Font("NanumSquare", Font.PLAIN, 25);
       lb.setFont(plain_font);
       tf.setFont(plain_font);
       keyborad_sn.setFont(plain_font);
       search.setFont(plain_font);
-      keyborad_sn.setForeground(new Color(255, 255, 255));
+      keyborad_sn.setForeground(new Color(255, 255, 255)); // 버튼 속 텍스트 색상 설정
       search.setForeground(new Color(255, 255, 255));
 
       // 예약 방법 알려주는 라벨 설정
@@ -78,25 +76,26 @@ public class reservation extends JFrame {
       lb.setLocation(40, 250);
       lb.setSize(600, 34);
 
-      //테이블 넣을 패널 위치와 크기 설정
+      // 테이블 넣을 패널 위치와 크기 설정
       JPanel jPanel_Book = new JPanel();
       jPanel_Book.setSize(690,300);
       jPanel_Book.setLocation(0,300);
 
-      //테이블
-      //1. 테이블 정보정의
+      // 테이블 정보정의
       String header[]= {"도서ID", "청구기호", "도서명", "저자", "출판사", "예약가능여부"};
       String contents[][]= { };
-      //2. jtable 클래스의 객체 생성
       DefaultTableModel Book_model = new DefaultTableModel(contents, header);
+      // 테이블 객체 생성
       JTable Book_table = new JTable(Book_model);
       Book_table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+      // 테이블 스크롤 객체 생성(테이블에 스크롤 기능 추가)
       JScrollPane Book_scrollPane =new JScrollPane(Book_table);
       Book_scrollPane.setPreferredSize(new Dimension(527,300));
-      //3.
+
       jPanel_Book.add(Book_scrollPane);
       c.add(jPanel_Book);
       
+      // DB 연동
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
@@ -113,7 +112,6 @@ public class reservation extends JFrame {
 				Book_model.addRow(data);
 			}
 
-			// for (int i = 0; i < data.length; i++) {}
 
 		} catch (Exception e) {
 			System.out.println("MySQL 서버 연동 실패 > " + e.toString());
@@ -124,75 +122,16 @@ public class reservation extends JFrame {
 		btn2.addActionListener(new inActionListener());
 		btn3.addActionListener(new inActionListener());
 		keyborad_sn.addActionListener(new keyboardActionListener());
-		/*
-		search.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String value = tf.getText();
-				if (Book_table.getSelectedRow() == -1) {
-					return;
-				} else {
-
-					try {
-
-						for(int i = 0; i < Book_model.getRowCount();i++ ) {
-							Book_model.removeRow(i);
-						}
-						/*
-						String header[]= {"도서ID", "청구기호", "도서명", "저자", "출판사", "예약가능여부"};
-					      String contents[][]= { };
-					      //2. jtable 클래스의 객체 생성
-					      DefaultTableModel Book_model1 = new DefaultTableModel(contents, header);
-					      JTable Book_table1 = new JTable(Book_model1);
-					      Book_table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-					      JScrollPane Book_scrollPane1 =new JScrollPane(Book_table1);
-					      Book_scrollPane1.setPreferredSize(new Dimension(527,300));
-					      //3.
-					      jPanel_Book.add(Book_scrollPane1);
-					      c.add(jPanel_Book);
-					     */
-					     /*
-						DefaultTableModel dm = (DefaultTableModel) Book_table.getModel();
-						int rowCount = dm.getRowCount();
-						//Remove rows one by one from the end of the table
-						for (int i = rowCount - 1; i >= 0; i--) {
-						    dm.removeRow(i);
-						}
-
-						//Book_model.setNumRows(0);
-
-						String temp = "select * from 도서 where lower(`도서명`) LIKE '%"+value+"%';";
-						System.out.println(temp);
-						ResultSet r = stmt.executeQuery(temp);
-						r.next();
-
-						while (r.next()) {
-							Object data[] = { r.getString("도서 ID"), r.getString("청구기호"), r.getString("도서명"),
-									r.getString("저자(역자)"), r.getString("출판사"), r.getString("예약가능여부") };
-
-							Book_model.addRow(data);
-
-						}
 
 
-					} catch (Exception ex) {
-						System.out.println("MySQL 서버 연동 실패 > " + ex.toString());
-					}
-
-				}
-
-			}
-
-		}); */
-
-
-      // 예약버튼
+      // 예약버튼 설정
       reserv.setFont(big_font);
       reserv.setForeground(new Color(255, 255, 255));
       reserv.setBackground(new Color(255, 153, 051));
       reserv.setSize(210, 100);
       reserv.setLocation(128, 670);
-      reserv.addActionListener(new ActionListener() {
+      reserv.addActionListener(new ActionListener() { // 예약 버튼 액션 리스너 정의
+    	  	// DB 연동
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int value1 = 0;
@@ -206,11 +145,9 @@ public class reservation extends JFrame {
 					System.out.println((Book_table.getValueAt(row, 0)).getClass().getTypeName());
 					value1 = Integer.valueOf((String) Book_table.getValueAt(row, 5));// 예약 가능 여부
 					value2 = Integer.valueOf((String)Book_table.getValueAt(row, 0));
-					//System.out.println(value1);
-					//System.out.println(value2);
-					if (value1 == 1) {
+					if (value1 == 1) { // 예약 가능 여부가 1일 때
 						try {
-
+							// DB 연동
 							String sql = "update 도서 set `예약가능여부` = 0 where `도서 ID`= "+value2;
 							System.out.println(sql);
 							int result = stmt.executeUpdate(sql);
@@ -226,15 +163,17 @@ public class reservation extends JFrame {
 							int result2 = stmt.executeUpdate(sql1);
 							System.out.println(result2);
 							
+							// 예약 성공 확인 알림창
 							JOptionPane.showMessageDialog(null, "예약되었습니다.", "확인 메세지", JOptionPane.INFORMATION_MESSAGE);
 							
-							new reservation();
+							new reservation(); // 예약 정보 반영된 창으로 다시 띄움
 							dispose();
 							
 						} catch (Exception ex) {
 							System.out.println("MySQL 서버 연동 실패 > " + ex.toString());
 						}
-					} else {
+					} else { // 예약 가능 여부가 0일 때
+						// 예약 실패 확인 알림창
 						JOptionPane.showMessageDialog(null, "예약이 불가능합니다.", "오류 메세지", JOptionPane.ERROR_MESSAGE);
 					}
 				}
@@ -243,13 +182,13 @@ public class reservation extends JFrame {
 
 		});
 
-      // 홈버튼
-      ImageIcon homeIcon = new ImageIcon("library/images/home.png");
+      // 홈버튼 설정
+      ImageIcon homeIcon = new ImageIcon("library/images/home.png"); // 이미지를 가진 이미지 아이콘 생성
       Image homeimg = homeIcon.getImage();
-      homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH);
+      homeimg = homeimg.getScaledInstance(52, 52, java.awt.Image.SCALE_SMOOTH); // 이미지 크기 조절
       homeIcon = new ImageIcon(homeimg);
 
-      JButton btn_home = new JButton("Home", homeIcon);
+      JButton btn_home = new JButton("Home", homeIcon); // 홈버튼에 Home 이미지와 텍스트 추가
       btn_home.setBackground(Color.gray);
 
       btn_home.setFont(big_font);
@@ -275,50 +214,40 @@ public class reservation extends JFrame {
       setSize(700, 800);
       setVisible(true);
    }
-
-   class inActionListener implements ActionListener {
+   
+   // 대출, 예약, 연장, Home 버튼 클릭시 해당 창으로 이동하는 액션 리스너
+   class inActionListener implements ActionListener { 
       public void actionPerformed(ActionEvent e) {
-         JButton b = (JButton) e.getSource();
-         if (b.getText().equals("대출")) {
+         JButton b = (JButton) e.getSource(); // 버튼의 텍스트 받아옴
+         if (b.getText().equals("대출")) { // 대출 버튼일 때
             new borrow();
             dispose();
-         } else if (b.getText().equals("예약")) {
+         } else if (b.getText().equals("예약")) { // 예약 버튼일 때
             new reservation();
             setVisible(false);
-         } else if (b.getText().equals("연장")) {
+         } else if (b.getText().equals("연장")) { // 연장 버튼일 때
             new extension();
             setVisible(false);
-         } else if (b.getText().equals("Home")) {
+         } else if (b.getText().equals("Home")) { // Home 버튼일 때
             new library_main();
             db.logout();
             dispose();
          }
       }
    }
-
-   class sActionListener implements ActionListener {
-      public void actionPerformed(ActionEvent e) {
-         String all = tf.getText().trim();
-
-         if (all.equals("-")) { // 검색한 도서 db에 없는 경우(if문 조건 수정 필요)
-            JOptionPane.showMessageDialog(null, "해당 도서가 없습니다.", "도서 검색", JOptionPane.ERROR_MESSAGE);
-         } else {
-            // DB 불러와서 해당 도서 검색 결과 띄우기
-//            (DB)내용.addActionListener(new rActionListener());
-         }
-      }
-   }
-
-   class keyboardActionListener implements ActionListener {
+   
+   // 키보드 창 띄우는 액션 리스너
+   class keyboardActionListener implements ActionListener { 
       public void actionPerformed(ActionEvent e) {
          JButton b = (JButton) e.getSource();
-         if (b.getText().equals("입력")) {
+         if (b.getText().equals("입력")) { // 입력 버튼 눌렀을 때
             new keyBorad();
 
          }
       }
    }
 
+   // 도서 입력 키보드로 입력버튼 클릭 시 input_sn에 입력된 학번이 들어감
    class keyBorad extends JFrame {
       private JPanel p1 = new JPanel();
       private JPanel p2_KEY = new JPanel();
@@ -382,8 +311,9 @@ public class reservation extends JFrame {
          setSize(700, 330);
          setVisible(true);
       }
-
-      class inputkey_ActionListener implements ActionListener {
+      
+      // 버튼 클릭 시, 버튼에 적힌 문자를 TestArea에 추가하는 형식의 액션 리스너
+      class inputkey_ActionListener implements ActionListener { 
          public void actionPerformed(ActionEvent e) {
             JButton b = (JButton) e.getSource();
             if (b.getText().equals("1")) {
