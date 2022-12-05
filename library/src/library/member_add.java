@@ -115,7 +115,7 @@ public class member_add extends JFrame {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						con = DriverManager.getConnection(url, username, password);
 						stmt = con.createStatement();
-						String sql = "select count(*) from 학생 where 회원아이디 = " + Textnum.getText();
+						String sql = "select count(*) from 학생 where 회원아이디 = " + Textnum.getText(); // 학번(PK) 중복확인
 
 						ResultSet result = stmt.executeQuery(sql);
 
@@ -129,7 +129,9 @@ public class member_add extends JFrame {
 						System.out.println("MySQL 서버 연동 실패 > " + ex.toString());
 					}
 
-					if (result1 == 0) {
+					if (result1 == 0) { // 중복된 학번이 없을 때
+						
+						// 회원정보 삽입
 						String sql = "INSERT INTO 학생 (`회원아이디`,`비밀번호`, `이름`, `휴대전화`, `이메일`, `학과`, `대출가능권수`) VALUES ( "
 								+ Textnum.getText() + ", \"" + Textpassword.getText() + "\", \"" + name.getText()
 								+ "\", \"" + phone.getText() + "\", \"" + email.getText() + "\", \"" + major.getText()
