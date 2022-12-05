@@ -48,7 +48,7 @@ public class login extends JFrame {
 		input_sn.setLocation(142, 250);
 		input_sp.setLocation(142, 350);
 
-		//키보드 버튼 설정(사이즈, 위치, 색, 레이아웃, 글꼴)
+		//입력1,2 버튼 설정(사이즈, 위치, 색, 레이아웃, 글꼴)
 		keyborad_sn.setSize(110,62);
 		keyborad_sp.setSize(110,62);
 
@@ -232,6 +232,7 @@ public class login extends JFrame {
 			setVisible(true);
 		}
 
+		// 버튼 클릭 시, 버튼에 적힌 문자를 TestArea에 추가하는 형식의 리스너
 		class inputkey_ActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				JButton b = (JButton) e.getSource();
@@ -477,7 +478,8 @@ public class login extends JFrame {
 			setSize(700, 330);
 			setVisible(true);
 		}
-
+		
+		// 버튼 클릭 시, 버튼에 적힌 문자를 TestArea에 추가하는 형식의 리스너
 		class inputkey_ActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
 				JButton b = (JButton) e.getSource();
