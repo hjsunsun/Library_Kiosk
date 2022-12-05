@@ -58,22 +58,24 @@ public class BookPage extends JFrame {
 		jPanel_Book.add(Book_scrollPane);
 		c.add(jPanel_Book);
 
-		// db에 저장된 데이터-> 테이브로 보여주기
+		// db에 저장된 데이터-> 테이블로 보여주기
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
 			stmt = con.createStatement();
 
-			String sql = "select * from 도서;";
+			String sql = "select * from 도서;"; // 도서 테이블 전체 조회
 
-			ResultSet result = stmt.executeQuery(sql);
+			ResultSet result = stmt.executeQuery(sql); //sql execute
 
-			while (result.next()) {
+			while (result.next()) { 
+				
+				//갖고온 data 가공하여 테이블의 한 행으로 만들기
 				Object data[] = { result.getString("도서 ID"), result.getString("청구기호"), result.getString("도서명"),
 						result.getString("저자(역자)"), result.getString("출판사"), result.getString("출판연도"),
 						result.getString("구분"), result.getString("언어") };
-
-				Book_model.addRow(data);
+				
+				Book_model.addRow(data); //테이블에 한 행씩 
 			}
 
 			// for (int i = 0; i < data.length; i++) {}
