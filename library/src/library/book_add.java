@@ -129,12 +129,12 @@ public class book_add extends JFrame {
 						con = DriverManager.getConnection(url, username, password);
 						stmt = con.createStatement();
 						String sql = "select count(*) from 도서 where 도서.`도서 ID` = " + BookID.getText()
-								+ " OR 도서.`청구기호` = \"" + Booknum.getText() + "\"";
+								+ " OR 도서.`청구기호` = \"" + Booknum.getText() + "\""; // 중복된 도서 ID와 청구기호가 있는지 확인
 
 						ResultSet result = stmt.executeQuery(sql);
 
 						while (result.next()) {
-							result1 = result.getInt(1);
+							result1 = result.getInt(1); //count한 갯수 받아옴
 							System.out.println(result1);
 
 						}
@@ -143,7 +143,7 @@ public class book_add extends JFrame {
 						System.out.println("MySQL 서버 연동 실패 > " + ex.toString());
 					}
 
-					if (result1 == 0) {
+					if (result1 == 0) { //도서 ID와 청구기호 중복되는 값이 없을 때 execute 실행
 
 						String sql = "INSERT INTO 도서 (`도서 ID`,`청구기호`, `도서명`, `저자(역자)`, `출판사`, `출판연도`, `구분`, `언어`, `대출가능여부`, `예약가능여부`) VALUES ( "
 								+ BookID.getText() + ", \"" + Booknum.getText() + "\", \"" + Bookname.getText()
