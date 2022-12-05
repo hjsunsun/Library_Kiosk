@@ -91,7 +91,7 @@ public class extension extends JFrame {
 			con = DriverManager.getConnection(url, username, password);
 			stmt = con.createStatement();
 
-			String temp = "select 회원아이디, 이름 FROM 학생 where loginYN = 1;";
+			String temp = "select 회원아이디, 이름 FROM 학생 where loginYN = 1;"; //현재 로그인한 학생의 학번(PK)과 이름 조회
 			ResultSet r = stmt.executeQuery(temp);
 			r.next();
 			String userId = r.getString("회원아이디");
@@ -99,17 +99,18 @@ public class extension extends JFrame {
 			idtf.setText(userId);
 			nametf.setText(userName);
 			System.out.println(userId);
-
+	
+			//로그인한 학생이 빌린 대여행의 대여 ID와 해당 대여 ID에 해당하는 도서 정보 select
 			String sql = "select A.대여ID, B.도서명, A.대출일자, A.반납가능일자, A.연장횟수 From 대여 AS A JOIN 도서 AS B ON A.도서ID = B.`도서 ID`where A.회원학번 = "
 					+ userId;
 			ResultSet result = stmt.executeQuery(sql);
 
 			while (result.next()) {
-
+				//데이터 한 행씩 가공
 				Object data[] = { result.getString("A.대여ID"), result.getString("B.도서명"), result.getString("A.대출일자"),
 						result.getString("A.반납가능일자"), result.getString("A.연장횟수") };
 
-				Book_model.addRow(data);
+				Book_model.addRow(data); //테이블에 
 			}
 
 		} catch (Exception e) {
